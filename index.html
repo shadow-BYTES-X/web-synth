@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Audio Projekt</title>
+</head>
+<body>
+    
+    <div id="osc">
+        <div class="component"> 
+            <label for="waveform">WAVEFORM</label> 
+            <input type="range" min="0" max="3" step="1.0" value="0" id="wave"> 
+            <p id="wavenumber">0</p>
+        </div> 
+
+        <div class="component"> 
+            <label for="VOLUME">VOLUME</label> 
+        <input type="range" min="0" max="3" step="0.1" value="0.33" id="volume"> 
+        <p id="volumenumber">0</p> 
+        </div> 
+
+    </div> 
+
+    <div id="filter">
+        <div class="component">
+            <label for="frequency">FREQUENCY</label> 
+            <input type="range" min="0" max="20000" step="1" value="0" id="filterfrequencylow"> 
+            <p id="frequencynumberlow">0</p>
+        </div> 
+
+        <div class="component">
+
+        </div> 
+
+        <div class="component">
+            <label for="frequency">FREQUENCY</label> 
+            <input type="range" min="0" max="20000" step="1" value="0" id="filterfrequencyhigh"> 
+            <p id="frequencynumberhigh">0</p>
+        </div>
+    </div> 
+
+    <div id="release">
+        <div class="component">
+            <label for="release">RELEASE</label> 
+            <input type="range" min="0" max="20000" step="1" value="0" id="releasetime"> 
+            <p id="releasenumber">0</p>
+        </div> 
+    </div> 
+
+
+    
+    <script src="./midi.js"></script> 
+    <script src="./UIInputHandling.js"></script> 
+    <!-- <script src="./reverbFX.js"></script> --> 
+    <script src="./main.js"></script> 
+</body>
+</html> 
