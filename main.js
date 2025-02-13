@@ -59,7 +59,8 @@ function createOSC(frequency, velocityValue) {
     velocityGain = audioCTX.createGain(); 
     velocityGain.gain.value = (1 / 127) * velocityValue; 
     osc.gainObject = OSCgain; 
-    osc.filterObject = {}; 
+    osc.filterObjectLow = {}; 
+    osc.filterObjectHigh = {}; 
     oscillators[frequency.toString()] = osc; 
 
 } 
@@ -72,14 +73,14 @@ function createOSC(frequency, velocityValue) {
 function playNote(frequency, velocityValue) {
     createOSC(frequency, velocityValue); 
     createFilterLow(frequency); 
-    createFilterHigh(); 
+    createFilterHigh(frequency); 
         // -- routing 
         
         oscillators[frequency.toString()]
         .connect(velocityGain)
         .connect(OSCgain)
-        .connect(oscillators[frequency.toString()].filterObject)
-        /*.connect(filterHigh)*//*.connect(reverb)*/
+        .connect(oscillators[frequency.toString()].filterObjectLow)
+        .connect(oscillators[frequency.toString()].filterObjectHigh)/*.connect(reverb)*/ 
         .connect(audioCTX.destination); 
 
     oscillators[frequency.toString()].start(); 
@@ -118,15 +119,20 @@ function createFilterLow(frequency) {
     filter.type = filtertypes[0]; 
     filter.frequency.setTargetAtTime(filterFrequencyLow, audioCTX.currentTime, 0); 
 
-    oscillators[frequency.toString()].filterObject = filter; 
+    oscillators[frequency.toString()].filterObjectLow = filter; 
 
     
 } 
 
-function createFilterHigh() {
-    filterHigh = audioCTX.createBiquadFilter(); 
-    filterHigh.type = filtertypes[1]; 
-    filterHigh.frequency.setTargetAtTime(filterFrequencyHigh, audioCTX.currentTime, 0); 
-    
+function createFilterHigh(frequency) { 
+    let filter = audioCTX.createBiquadFilter(); 
+
+    filter.type = filtertypes[1]; 
+    filter.frequency.setTargetAtTime(filterFrequencyHigh, audioCTX.currentTime, 0); 
+
+
+    oscillators[frequency.toString()].filterObjectHigh = filter; 
+
+
 } 
 

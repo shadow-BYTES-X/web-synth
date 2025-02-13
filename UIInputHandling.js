@@ -45,8 +45,7 @@ frequencyFaderLow.addEventListener('input', () => {
     console.log('lowpass'); 
     console.log(oscillators);
     for(osc in oscillators) { 
-        console.log(osc); 
-        oscillators[osc].filterObject.frequency.setTargetAtTime(frequencyFaderLow.value, audioCTX.currentTime, 0);
+        oscillators[osc].filterObjectLow.frequency.setTargetAtTime(frequencyFaderLow.value, audioCTX.currentTime, 0);
     }
     filterFrequencyLow = frequencyFaderLow.value; 
 
@@ -56,9 +55,10 @@ frequencyFaderLow.addEventListener('input', () => {
 
 frequencyFaderHigh.addEventListener('input', () => { 
     console.log('highpass');
-    filterHigh.frequency.setTargetAtTime(frequencyFaderHigh.value, audioCTX.currentTime, 0); 
+    for(osc in oscillators) {
+    oscillators[osc].filterObjectHigh.frequency.setTargetAtTime(frequencyFaderHigh.value, audioCTX.currentTime, 0); 
     filterFrequencyHigh = frequencyFaderHigh.value; 
-
+    }
     document.querySelector('#frequencynumberhigh').textContent = frequencyFaderHigh.value; 
 }); 
 
