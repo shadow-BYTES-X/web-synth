@@ -8,9 +8,12 @@ let frequencyFaderHigh = document.querySelector('#filterfrequencyhigh');
 
 let releaseTimeFader = document.querySelector('#releasetime'); 
 
+let backgroundImageIteration = 0;
+
 
 
 function initData() { 
+    document.querySelector('#wavenumber').textContent = OSCwaveform; 
     volumeFader.value = OSCgainvalue; 
     document.querySelector('#volumenumber').textContent = volumeFader.value; 
     frequencyFaderLow.value = filterFrequencyLow; 
@@ -26,24 +29,26 @@ function initData() {
 
 //      -- osc 
 waveFader.addEventListener('input', () => { 
-    osc.type = waveforms[waveFader.value]; 
     OSCwaveform = waveforms[waveFader.value]; 
-    document.querySelector('#wavenumber').textContent = waveFader.value; 
+    document.querySelector('#wavenumber').textContent = waveforms[waveFader.value]; 
+    backgroundImageIteration = waveFader.value; 
+    let path = "url('./img/synthwave-background-" + (parseInt(backgroundImageIteration) + parseInt(1)) +".jpg')"; 
+    console.log(path);
+    document.body.style.backgroundImage = path; 
+    
+    osc.type = waveforms[waveFader.value]; 
 
 }); 
 
 volumeFader.addEventListener('input', () => { 
-    OSCgain.gain.value = volumeFader.value; 
     OSCgainvalue = volumeFader.value; 
     document.querySelector('#volumenumber').textContent = volumeFader.value; 
-
+    OSCgain.gain.value = volumeFader.value; 
 }); 
 
 //      -- filter 
 
 frequencyFaderLow.addEventListener('input', () => {
-    console.log('lowpass'); 
-    console.log(oscillators);
     for(osc in oscillators) { 
         oscillators[osc].filterObjectLow.frequency.setTargetAtTime(frequencyFaderLow.value, audioCTX.currentTime, 0);
     }
@@ -53,8 +58,7 @@ frequencyFaderLow.addEventListener('input', () => {
 
 }); 
 
-frequencyFaderHigh.addEventListener('input', () => { 
-    console.log('highpass');
+frequencyFaderHigh.addEventListener('input', () => {
     for(osc in oscillators) {
     oscillators[osc].filterObjectHigh.frequency.setTargetAtTime(frequencyFaderHigh.value, audioCTX.currentTime, 0); 
     filterFrequencyHigh = frequencyFaderHigh.value; 

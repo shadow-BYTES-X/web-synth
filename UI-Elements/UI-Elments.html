@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+
     <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,15 @@
 </head>
 <body>
     
-    <input type="range" class="input-knob" data-diameter="32" data-src="./img/knob70.png" data-sprites="100"/>
+    <input type="range" class="input-knob" data-diameter="60" data-src="./img/knob70.png" data-sprites="100"/> 
 
+    <div id="slider-container">
+        <input type="range" min="0" max="1" step="0.001" value="0.05" class="slider"> 
+    </div>
+   
+    <div id="thumb"></div>
+
+    <script src="https://g200kg.github.io/input-knobs/input-knobs.js"></script> 
     <script src="./main.js"></script> 
 </body>
 </html>

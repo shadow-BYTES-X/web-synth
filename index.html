@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" href="./img/synthwave-background-2.jpg" as="image"> 
+    <link rel="preload" href="./img/synthwave-background-3.jpg" as="image"> 
+    <link rel="preload" href="./img/synthwave-background-4.jpg" as="image"> 
+    <link rel="stylesheet" href="./style.css"> 
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Audio Projekt</title>
 </head>
 <body>
     
-    <div id="osc">
+    <div id="osc" class="main-component"> 
+        <h2>OSC</h2> 
         <div class="component"> 
             <label for="waveform">WAVEFORM</label> 
-            <input type="range" min="0" max="3" step="1.0" value="0" id="wave"> 
+            <input type="range" min="0" max="3" step="1.0" value="0" id="wave" class="input-knob" data-diameter="120" data-src="./img/knob70.png" data-sprites="100"> 
             <p id="wavenumber">0</p>
         </div> 
 
         <div class="component"> 
             <label for="VOLUME">VOLUME</label> 
-        <input type="range" min="0" max="3" step="0.1" value="0.33" id="volume"> 
+        <input type="range" min="0" max="2" step="0.1" value="0.33" id="volume" class="slider"> 
         <p id="volumenumber">0</p> 
         </div> 
 
     </div> 
 
-    <div id="filter">
+    <div id="filter" class="main-component">
         <div class="component">
             <label for="frequency">FREQUENCY</label> 
             <input type="range" min="0" max="20000" step="1" value="0" id="filterfrequencylow"> 
             <p id="frequencynumberlow">0</p>
         </div> 
 
-        <div class="component">
-
-        </div> 
+        
 
         <div class="component">
             <label for="frequency">FREQUENCY</label> 
@@ -41,7 +44,7 @@
         </div>
     </div> 
 
-    <div id="release">
+    <div id="release" class="main-component">
         <div class="component">
             <label for="release">RELEASE</label> 
             <input type="range" min="0" max="20000" step="1" value="0" id="releasetime"> 
@@ -53,6 +56,7 @@
     
     <script src="./midi.js"></script> 
     <script src="./UIInputHandling.js"></script> 
+    <script src="https://g200kg.github.io/input-knobs/input-knobs.js"></script> 
     <!-- <script src="./reverbFX.js"></script> --> 
     <script src="./main.js"></script> 
 </body>
